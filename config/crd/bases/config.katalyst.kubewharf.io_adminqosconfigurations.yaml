@@ -76,6 +76,28 @@ spec:
                               to ensure that shared_cores pods can suppress and preempt
                               reclaimed_cores pods.
                             type: boolean
+                          cpuProvisionConfig:
+                            description: optional
+                            properties:
+                              indicatorTargets:
+                                additionalProperties:
+                                  items:
+                                    properties:
+                                      name:
+                                        type: string
+                                      target:
+                                        type: number
+                                    required:
+                                    - name
+                                    - target
+                                    type: object
+                                  type: array
+                                type: object
+                            required:
+                            - indicatorTargets
+                            type: object
+                        required:
+                        - cpuProvisionConfig
                         type: object
                       memoryAdvisorConfig:
                         properties:

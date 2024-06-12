@@ -131,6 +131,26 @@ type CPUAdvisorConfig struct {
 	// we will rely on kernel features to ensure that shared_cores pods can suppress and preempt reclaimed_cores pods.
 	// +optional
 	AllowSharedCoresOverlapReclaimedCores *bool `json:"allowSharedCoresOverlapReclaimedCores,omitempty"`
+
+	// optional
+	CPUProvisionConfig *CPUProvisionConfig `json:"cpuProvisionConfig"`
+}
+
+type QoSRegionType string
+
+type IndicatorTargetConfiguration struct {
+	Name   string  `json:"name"`
+	Target float64 `json:"target"`
+}
+
+type PolicyRamaConfiguration struct {
+	PIDParameters                   map[string]types.FirstOrderPIDParams
+	EnableBorwein                   bool
+	EnableBorweinModelResultFetcher bool
+}
+
+type CPUProvisionConfig struct {
+	IndicatorTargets map[QoSRegionType][]IndicatorTargetConfiguration `json:"indicatorTargets"`
 }
 
 type MemoryAdvisorConfig struct {
